@@ -110,11 +110,9 @@
     </nav>
 
     <div class="links">
-      <a class="btn" href="#"><i class="fa-solid fa-music"></i> Latest Mix</a>
-      <a class="btn" href="#"><i class="fa-solid fa-calendar-days"></i> Upcoming Shows</a>
-      <a class="btn" href="#"><i class="fa-solid fa-envelope"></i> Book Me</a>
+      <a class="btn" href="mailto:mainmedian@gmail.com"><i class="fa-solid fa-envelope"></i> Book Me</a>
 
-      <a class="btn tip" id="tipBtn" href="#"><i class="fa-solid fa-mug-hot"></i> Tip the DJ</a>
+      <a class="btn tip" id="tipBtn" href="https://ko-fi.com/dj_mon"><i class="fa-solid fa-mug-hot"></i> Tip the DJ</a>
       <div class="tip-row">
         <button class="amt" data-amt="5">$5</button>
         <button class="amt" data-amt="10">$10</button>
@@ -128,7 +126,7 @@
 <script>
   // Wire tip amounts to your payment provider (Venmo/PayPal/Stripe/Ko-fi).
   // Replace the URL builder below with your real link.
-  const tipUrl = amt => `https://venmo.com/u/your-handle?txn=pay&amount=${amt}&note=DJ%20Nova%20tip`;
+  const tipUrl = amt => `https://venmo.com/u/your-handle?txn=pay&amount=${amt}&note=DJ%20Mon%20tip`;
   document.querySelectorAll('.amt').forEach(b=>{
     b.addEventListener('click',()=>window.open(tipUrl(b.dataset.amt),'_blank','noopener'));
   });
