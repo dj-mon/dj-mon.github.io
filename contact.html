@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — DJ Mon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --bg:#0a0612; --neon:#b14bff; --neon2:#19d3ff; --accent:#ff2e87;
+    --card:rgba(255,255,255,.06); --text:#f4f0ff; --muted:#a99dc4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',system-ui,sans-serif;color:var(--text);
+    background:var(--bg);min-height:100vh;overflow-x:hidden;
+    display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  /* animated gradient aurora background */
+  body::before{
+    content:"";position:fixed;inset:-30%;z-index:-2;
+    background:
+      radial-gradient(40% 50% at 20% 30%,var(--neon) 0%,transparent 60%),
+      radial-gradient(45% 55% at 80% 20%,var(--neon2) 0%,transparent 60%),
+      radial-gradient(50% 60% at 50% 90%,var(--accent) 0%,transparent 60%);
+    filter:blur(60px);opacity:.45;animation:drift 18s ease-in-out infinite alternate;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;
+    background:radial-gradient(circle at 50% 0%,transparent 0%,var(--bg) 75%);
+  }
+  @keyframes drift{
+    0%{transform:translate(-4%,-3%) scale(1)}
+    100%{transform:translate(4%,4%) scale(1.12)}
+  }
+  .card{
+    width:100%;max-width:440px;background:var(--card);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.12);border-radius:28px;
+    padding:40px 28px 32px;text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.15);
+    animation:rise .8s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  .avatar{
+    width:96px;height:96px;border-radius:50%;margin:0 auto 18px;
+    display:grid;place-items:center;font-size:2.4rem;color:#fff;
+    background:linear-gradient(135deg,var(--neon),var(--neon2));
+    box-shadow:0 0 0 4px rgba(255,255,255,.08),0 0 40px var(--neon);
+    animation:pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse{50%{box-shadow:0 0 0 4px rgba(255,255,255,.08),0 0 60px var(--neon2)}}
+  h1{
+    font-family:'Orbitron',sans-serif;font-size:1.9rem;letter-spacing:2px;
+    background:linear-gradient(90deg,var(--neon2),var(--neon),var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tag{color:var(--muted);font-size:.95rem;margin:8px 0 24px;font-weight:600}
+  /* form */
+  form{display:flex;flex-direction:column;gap:14px;text-align:left}
+  .field{display:flex;flex-direction:column;gap:6px}
+  label{font-size:.82rem;font-weight:600;color:var(--muted);letter-spacing:.3px}
+  label .req{color:var(--accent)}
+  input,textarea,select{
+    width:100%;padding:13px 14px;border-radius:14px;font-family:inherit;
+    font-size:.95rem;color:var(--text);
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+    transition:border-color .2s,box-shadow .2s,background .2s;
+  }
+  input::placeholder,textarea::placeholder{color:rgba(169,157,196,.6)}
+  input:focus,textarea:focus,select:focus{
+    outline:none;border-color:var(--neon);background:rgba(255,255,255,.1);
+    box-shadow:0 0 0 3px rgba(177,75,255,.25);
+  }
+  textarea{resize:vertical;min-height:110px}
+  select option{background:var(--bg);color:var(--text)}
+  /* radio group */
+  fieldset{border:none}
+  fieldset legend{font-size:.82rem;font-weight:600;color:var(--muted);letter-spacing:.3px;margin-bottom:8px}
+  .radio-row{display:flex;gap:10px;flex-wrap:wrap}
+  .radio-row label{
+    flex:1;min-width:90px;display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 8px;border-radius:14px;cursor:pointer;font-size:.9rem;color:var(--text);
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);transition:.2s;
+  }
+  .radio-row input{display:none}
+  .radio-row label:hover{background:rgba(255,255,255,.13)}
+  .radio-row input:checked + span{color:#fff}
+  .radio-row label:has(input:checked){
+    background:linear-gradient(135deg,var(--neon),var(--neon2));border-color:transparent;
+    box-shadow:0 8px 24px rgba(177,75,255,.4);
+  }
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    padding:15px;border-radius:16px;font-weight:600;font-size:1rem;
+    text-decoration:none;color:var(--text);cursor:pointer;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+    transition:transform .2s,background .2s;
+  }
+  .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.13)}
+  .btn.send{
+    margin-top:6px;
+    background:linear-gradient(135deg,var(--accent),var(--neon));
+    border:none;color:#fff;font-weight:800;font-size:1.05rem;
+    box-shadow:0 10px 30px rgba(255,46,135,.45);
+  }
+  .btn.send:hover{box-shadow:0 14px 38px rgba(255,46,135,.6)}
+  .btn.send:disabled{opacity:.7;cursor:default;transform:none}
+  /* submit status message */
+  .status{font-size:.88rem;line-height:1.4;text-align:center;margin-top:4px}
+  .status:empty{display:none}
+  .status.ok{color:#5ef2b0}
+  .status.err{color:#ff7aa8}
+  .status a{color:inherit;font-weight:600}
+  .back{
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;
+    color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:600;
+    transition:color .2s;
+  }
+  .back:hover{color:var(--text)}
+  .foot{margin-top:24px;font-size:.74rem;color:var(--muted);text-align:center}
+  @media(max-width:380px){h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+  <main class="card">
+    <a class="back" href="dj-landing.html"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <div class="avatar"><i class="fa-solid fa-envelope"></i></div>
+    <h1>Get in Touch</h1>
+    <p class="tag">Book DJ Mon for your next event</p>
+
+    <form id="contactForm" action="https://twilight-bird-9460.tines.com/webhook/dj-mon-intake/" method="POST" novalidate>
+      <div class="field">
+        <label for="name">Name <span class="req">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="eventDate">Estimated Event Date <span class="req">*</span></label>
+        <input type="date" id="eventDate" name="eventDate" required>
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+      </div>
+
+      <fieldset>
+        <legend>Preferred Contact Method <span style="color:var(--muted);font-weight:400">(optional)</span></legend>
+        <div class="radio-row">
+          <label><input type="radio" name="preferredContact" value="email"><span><i class="fa-solid fa-envelope"></i> Email</span></label>
+          <label><input type="radio" name="preferredContact" value="messages"><span><i class="fa-solid fa-comment"></i> Messages</span></label>
+          <label><input type="radio" name="preferredContact" value="phone"><span><i class="fa-solid fa-phone"></i> Phone</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="message">Message <span class="req">*</span></label>
+        <textarea id="message" name="message" placeholder="Tell me about your event — venue, vibe, music preferences, anything!" required></textarea>
+      </div>
+
+      <button type="submit" class="btn send"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+      <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="foot">© 2026 DJ Mon · Turn it up 🔊</p>
+  </main>
+
+<script>
+  const WEBHOOK_URL = "https://twilight-bird-9460.tines.com/webhook/dj-mon-intake/";
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  const submitBtn = form.querySelector('.btn.send');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+    status.className = 'status';
+    status.textContent = '';
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Request failed: ' + res.status);
+
+      form.reset();
+      status.className = 'status ok';
+      status.innerHTML = '<i class="fa-solid fa-circle-check"></i> Thanks! Your message is on its way — DJ Mon will be in touch soon.';
+    } catch (err) {
+      status.className = 'status err';
+      status.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Something went wrong. Please try again, or email <a href="mailto:mainmedian@gmail.com">mainmedian@gmail.com</a>.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+    }
+  });
+</script>
+</body>
+</html>
